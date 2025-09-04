@@ -16,3 +16,4 @@ int main()
     printf(" valor de a %d\tvalor de b %d\n", a, b);
     return 0;
 }
+// preguntar en la practica si es correcto
