@@ -90,7 +90,7 @@ void contImpares(Tarbol A, pos P, int *impares, int niveles)
         while (!nulo(C))
         {
             gr++;
-            contImpares(A, C, impares, niveles + 1);
+            contImpares(A, C, impares, niveles + 1);/hacer en version int
             C = hijoder(C, A);
         }
 
@@ -106,10 +106,9 @@ void verhijos(Tarbol A, pos P, int *verifica)
     if (!nulo(P) && *verifica == 1)
     {
         C = hijomasizq(P, A);
-        while (!nulo(C))
+        while (!nulo(C) && verhijos(A, C, verifica))
         {
             gr++;
-            verhijos(A, C, verifica);
             C = hijoder(C, A);
         }
         if (gr > 0)
@@ -141,26 +140,33 @@ int verhijosint(Tarbol A, pos P)
     else
         return 1;
 }
-void PromedioK(Tarbol A, pos P, int nivel, float *prom, int K, int *suma, int *cont)
+void PromedioK(Tarbol A, pos P, int nivel, int K, int *suma, int *cont)
 {
     pos C;
 
     if (!nulo(P))
     {
-        if (nivel == K)
+        
+        if (nivel < K)
         {
-            (*cont)++;
-            *suma += info(P, A);
-        }
-
-        C = hijomasizq(P, A);
-        while (!nulo(C))
-        {
-
-            PromedioK(A, C, nivel + 1, prom, K, suma, cont);
-            C = hijoder(C, A);
-        }
-        if (*cont != 0 && nivel == 0)
-            *prom = (float)*suma / *cont;
+            if (nivel == k-1){
+                C = hijomasizq(P, A);
+                while (!nulo(C)  )
+                {
+                    (*cont)++;
+                    *suma += info(P, A);
+                     C = hijoder(C, A);
+                }
+            }
+               else{
+                    C = hijomasizq(P, A);
+                    while (!nulo(C) )
+                    {
+                    promedioK(A,C,nivel+1,K,suma,cont)
+                     C = hijoder(C, A);
+                    }
+               }
+        } else {*suma=info(P,A); *cont=1;}
+        
     }
 }
