@@ -13,11 +13,25 @@ typedef struct
     TLista L;
 } TLA;
 void cargaMatriz(int matmat[][MAX], int *N);
-int grVerticeM(int mat[][MAX], int N, int vert);
+int grVerticeL(TLA vecL[], int N, int vert);
 void main()
 {
 }
-int grVerticeM(int mat[][MAX], int N, int vert)
+int grVerticeL(TLA vecL[], int N, int vert)
 {
-    int j, i;
+    int i = 0;
+    int cont = 0;
+    TLista aux;
+    while (i < N && vecL[i].vertice != vert)
+        i++;
+    if (vecL[i].L != NULL)
+    {
+        aux = vecL[i].L;
+        while (aux != NULL)
+        {
+            cont++;
+            aux = aux->sig;
+        }
+    }
+    return cont;
 }
