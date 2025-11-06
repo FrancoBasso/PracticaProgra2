@@ -42,7 +42,7 @@ void RecorridoProfundidad(TLA LA[], int vv[], int N)
                 Vact = consultaP(P);
                 if (LA[Vact].L != NULL)
                 {
-                    contVal++;
+                    
                     aux = LA[Vact].L;
                     while (aux != NULL && vv[aux->dato] == 1)
                         aux = aux->sig;
@@ -59,9 +59,11 @@ void RecorridoProfundidad(TLA LA[], int vv[], int N)
                         sacaP(&P, &X);
                 }
             }
+            if (!todoVisit(vv,N) && VaciaP(P))
+                conVal++;
         }
     }
-    printf("los vertices conexos son un total de : %d", contVal);
+    printf("las componentes conexas son un total de : %d", contVal);
 }
 void RecorridoAmplitud(TLA LA[], int vv[], int N)
 {
@@ -81,6 +83,8 @@ void RecorridoAmplitud(TLA LA[], int vv[], int N)
             while (!VaciaC(C))
             {
                 sacaC(&C, &Vact);
+                 printf(" %d", aux->dato);
+                
                 if (LA[Vact].L != NULL)
                 {
                     aux = LA[Vact].L;
@@ -88,7 +92,6 @@ void RecorridoAmplitud(TLA LA[], int vv[], int N)
                     {
                         if (vv[aux->dato] == 0)
                         {
-                            printf(" %d", aux->dato);
                             vv[aux->dato] = 1;
                             poneC(&C, aux->dato);
                         }
@@ -96,6 +99,9 @@ void RecorridoAmplitud(TLA LA[], int vv[], int N)
                     }
                 }
             }
+            if (!todoVisit(vv,N) && VaciaP(P))
+                conVal++;
         }
     }
+    printf("las componentes conexas son un total de : %d", contVal);
 }
